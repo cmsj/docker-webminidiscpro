@@ -41,6 +41,12 @@ jobs:
           repository: asivery/webminidisc
           path: webminidisc
 
+      - name: Install dependencies and build
+        run: |
+          cd webminidisc
+          npm i
+          npm run build
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v3
         with:
