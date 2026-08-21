@@ -1,11 +1,11 @@
-name: CI Build
+name: Build atrac-api Docker image
 
 on:
   workflow_dispatch:
   push:
     paths:
-      - 'upstream_latest_commit.txt'
-      - 'upstream_docker_version.txt'
+      - 'atrac_api_upstream_latest_commit.txt'
+      - 'atrac_api_docker_base_image_version.txt'
 
 env:
   REGISTRY: ghcr.io
@@ -20,7 +20,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v7
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -35,30 +35,29 @@ jobs:
           username: ${{ github.repository_owner}}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Clone WMD Pro
+      - name: Clone atrac-api
         uses: actions/checkout@v7
         with:
-          repository: asivery/webminidisc
-          path: webminidisc
+          repository: MiniDisc-wiki/atrac-api
+          path: atrac-api
 
-      - name: Install dependencies and build
+      - name: Add dummy psp_at3tool.exe
         run: |
-          cd webminidisc
-          npm i
-          npm run build
+          cd atrac-api
+          touch psp_at3tool.exe
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v3
         with:
-          context: webminidisc
+          context: atrac-api
           platforms: linux/amd64
           push: true
           tags: |
-            ghcr.io/cmsj/webminidiscpro:latest
+            ghcr.io/cmsj/atrac-api:latest
 
       - name: Delete old images
         uses: actions/delete-package-versions@v4
         with:
-          package-name: 'webminidiscpro'
+          package-name: 'atrac-api'
           package-type: 'container'
           min-versions-to-keep: 5
