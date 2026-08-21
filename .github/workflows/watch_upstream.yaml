@@ -28,7 +28,7 @@ jobs:
         run: docker images --format '{{.Repository}} {{.Tag}} {{.ID}}' ${{ steps.base_image.outputs.label }} >upstream_docker_version.txt
 
       - name: Capture upstream git repo HEAD
-        run: sudo docker run --rm ${{ steps.base_image.outputs.label }} bash -c "pushd webminidisc >/dev/null ; git rev-parse HEAD ; popd >/dev/null" >upstream_latest_commit.txt
+        run: bash -c "pushd webminidisc >/dev/null ; git rev-parse HEAD ; popd >/dev/null" >upstream_latest_commit.txt
 
       - name: Check for modified files
         id: git-check
