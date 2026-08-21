@@ -41,6 +41,10 @@ jobs:
           repository: MiniDisc-wiki/atrac-api
           path: atrac-api
 
+      - name: Hack atrac-api Dockerfile to install nasm instead of yasm
+        run: |
+          sed -i 's/yasm/nasm/' atrac-api/Dockerfile
+
       - name: Add dummy psp_at3tool.exe
         run: |
           cd atrac-api
