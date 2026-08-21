@@ -38,9 +38,9 @@ jobs:
           repository: MiniDisc-wiki/atrac-api
           path: atrac-api
 
-      - name: Extract webminidiscpro target base image name/label
+      - name: Extract atrac-api target base image name/label
         id: base_image_atracapi
-        run: echo "label=$(grep FROM atrac-api/Dockerfile | awk '{ print $2 }')" >> $GITHUB_OUTPUT
+        run: echo "label=$(grep FROM atrac-api/Dockerfile | grep -v "AS builder" | awk '{ print $2 }')" >> $GITHUB_OUTPUT
 
       - name: Ensure we have the latest version of atrac-api base image
         run: sudo docker pull ${{ steps.base_image_atracapi.outputs.label }}
