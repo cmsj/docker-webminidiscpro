@@ -11,9 +11,15 @@ jobs:
         with:
           token: ${{ secrets.REPO_SCOPED_TOKEN }}
 
+      - name: Check out webminidiscpro
+        uses: actions/checkout@v7
+        with:
+          repository: asivery/webminidisc
+          path: webminidisc
+
       - name: Extract our target base image name/label
         id: base_image
-        run: echo "label=$(grep FROM src/Dockerfile | awk '{ print $2 }')" >> $GITHUB_OUTPUT
+        run: echo "label=$(grep FROM webminidisc/Dockerfile | awk '{ print $2 }')" >> $GITHUB_OUTPUT
 
       - name: Ensure we have the latest version of our base image
         run: sudo docker pull ${{ steps.base_image.outputs.label }}
@@ -22,7 +28,7 @@ jobs:
         run: docker images --format '{{.Repository}} {{.Tag}} {{.ID}}' ${{ steps.base_image.outputs.label }} >upstream_docker_version.txt
 
       - name: Capture upstream git repo HEAD
-        run: sudo docker run --rm ${{ steps.base_image.outputs.label }} bash -c "git clone https://github.com/asivery/webminidisc >/dev/null 2>&1 ; git rev-parse HEAD" >upstream_latest_commit.txt
+        run: sudo docker run --rm ${{ steps.base_image.outputs.label }} bash -c "pushd webminidisc >/dev/null ; git rev-parse HEAD ; popd >/dev/null" >upstream_latest_commit.txt
 
       - name: Check for modified files
         id: git-check
