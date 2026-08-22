@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - 'webminidiscpro_upstream_latest_commit.txt'
-      - 'webminidiscpro_docker_base_image_version.txt'
+      - 'versions/webminidiscpro_upstream_latest_commit.txt'
+      - 'versions/webminidiscpro_docker_base_image_version.txt'
 
 env:
   REGISTRY: ghcr.io

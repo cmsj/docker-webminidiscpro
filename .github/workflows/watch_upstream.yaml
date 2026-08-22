@@ -29,10 +29,10 @@ jobs:
         run: sudo docker pull ${{ steps.base_image_webminidiscpro.outputs.label }}
 
       - name: Capture webminidiscpro base image hash
-        run: docker images --format '{{.Repository}} {{.Tag}} {{.ID}}' ${{ steps.base_image_webminidiscpro.outputs.label }} >webminidiscpro_docker_base_image_version.txt
+        run: docker images --format '{{.Repository}} {{.Tag}} {{.ID}}' ${{ steps.base_image_webminidiscpro.outputs.label }} >versions/webminidiscpro_docker_base_image_version.txt
 
       - name: Capture webminidiscpro upstream git repo HEAD
-        run: bash -c "pushd webminidisc >/dev/null ; git rev-parse HEAD ; popd >/dev/null" >webminidiscpro_upstream_latest_commit.txt
+        run: bash -c "git -C webminidisc rev-parse HEAD" >versions/webminidiscpro_upstream_latest_commit.txt
 
 # Second handle atrac-api
       - name: Check out atrac-api
@@ -49,10 +49,10 @@ jobs:
         run: sudo docker pull ${{ steps.base_image_atracapi.outputs.label }}
 
       - name: Capture atrac-api base image hash
-        run: docker images --format '{{.Repository}} {{.Tag}} {{.ID}}' ${{ steps.base_image_atracapi.outputs.label }} >atrac_api_docker_base_image_version.txt
+        run: docker images --format '{{.Repository}} {{.Tag}} {{.ID}}' ${{ steps.base_image_atracapi.outputs.label }} >versions/atrac_api_docker_base_image_version.txt
 
       - name: Capture atrac-api upstream git repo HEAD
-        run: bash -c "pushd atrac-api >/dev/null ; git rev-parse HEAD ; popd >/dev/null" >atrac_api_upstream_latest_commit.txt
+        run: bash -c "git -C atrac-api rev-parse HEAD" >atrac_api_upstream_latest_commit.txt
 
 # Now process the results and commit if there are any changes
       - name: Check for modified files

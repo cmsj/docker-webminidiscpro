@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - 'atrac_api_upstream_latest_commit.txt'
-      - 'atrac_api_docker_base_image_version.txt'
+      - 'versions/atrac_api_upstream_latest_commit.txt'
+      - 'versions/atrac_api_docker_base_image_version.txt'
 
 env:
   REGISTRY: ghcr.io
