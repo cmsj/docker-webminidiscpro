@@ -2,11 +2,11 @@
 
 ## What is this?
 
-For users of some old MiniDisc hardware, it’s possible to connect them to a computer via USB, to transfer music to/from the discs. The wonderful people in the modern MiniDisc community have figured out Sony’s protocols and created a web application called [Web MiniDisc Pro](https://www.minidisc.wiki/guides/webminidisc/start) that only needs a browser.
+Some old MiniDisc hardware can be connected to a computer via USB, to transfer music to/from the discs. The wonderful people in the MiniDisc community have figured out Sony’s protocols and created a web application called [Web MiniDisc Pro](https://www.minidisc.wiki/guides/webminidisc/start) that only needs a browser to manage discs. They also host this application publically for anyone to use!
 
-While using their hosted service is great, sometimes you might want to self-host it. They do provider a `Dockerfile you can build your own image with`, but sometimes you might just want someone else to take care of building the docker images for you and pushing them to a registry.
+While using their hosted service is great, sometimes you might want to self-host it. They do provider a `Dockerfile` you can build your own image with, but sometimes you might just want someone else to take care of building the docker images for you and pushing them to a registry.
 
-That is what this repo does. It is not a fork of WMDPro - none of the application’s code lives here.
+That is what this repo does. It is not a fork of WMDPro - none of the application’s code lives here. All credit for the existence of WMDPro goes to the awesome people who made it.
 
 What this repo does, is simply build and publish Docker images of WMDPro (and atrac-api - see below) automatically when there are updates available.
 
@@ -53,7 +53,7 @@ services:
 * Load WMDPro in your browser (on port `8080` if you used the above Docker commands unmodified)
 * Click on the three dots at the top right of the page, select `Settings`
 * For "`LP/HiMD encoder to use`", select "`Remote ATRAC Encoder`"
-* Enter `http://atrac-api:5000` (If you've changed the networking setup of the Docker instances, the hostname `atrac-api` might not work)
+* Enter `http://atrac-api:5000` as the Server Address.
 
 ### What is `psp_at3tool.exe` and how do I find it?
 
@@ -61,12 +61,12 @@ This is a windows executable that was apparently part of the Sony PlayStation Po
 
 I can’t tell you exactly where to get a copy, because Sony Computer Entertainment Inc (SCEI) never licensed it for third party distribution.
 
-That being said, the web's memory is long, and it is not very hard to find where to download psp_at3tool.exe.
+That being said, the web's memory is long, and it is not very hard to find where to download `psp_at3tool.exe`.
 
 ## Why would I want to run this myself?
 
 Maybe you want to use it offline, maybe you want it to be faster than using the version hosted by the MiniDisc Wiki, maybe you just want to. That's up to you!
 
-## How does this repo watch and build those repos?
+## How does this repo watch for upstream changes and build the images?
 
 See the `.github/workflows/` folder - the entire thing is orchestrated via GitHub Actions
