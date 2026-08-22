@@ -52,7 +52,7 @@ jobs:
         run: docker images --format '{{.Repository}} {{.Tag}} {{.ID}}' ${{ steps.base_image_atracapi.outputs.label }} >versions/atrac_api_docker_base_image_version.txt
 
       - name: Capture atrac-api upstream git repo HEAD
-        run: bash -c "git -C atrac-api rev-parse HEAD" >atrac_api_upstream_latest_commit.txt
+        run: bash -c "git -C atrac-api rev-parse HEAD" >versions/atrac_api_upstream_latest_commit.txt
 
 # Now process the results and commit if there are any changes
       - name: Check for modified files
