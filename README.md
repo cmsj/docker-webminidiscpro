@@ -4,7 +4,7 @@
 
 Some old MiniDisc hardware can be connected to a computer via USB, to transfer music to/from the discs. The wonderful people in the MiniDisc community have figured out Sony’s protocols and created a web application called [Web MiniDisc Pro](https://www.minidisc.wiki/guides/webminidisc/start) that only needs a browser to manage discs. They also host this application publically for anyone to use!
 
-While using their hosted service is great, sometimes you might want to self-host it. They do provider a `Dockerfile` you can build your own image with, but sometimes you might just want someone else to take care of building the docker images for you and pushing them to a registry.
+While using their hosted service is great, sometimes you might want to self-host it. They do provide a `Dockerfile` you can build your own image with, but sometimes you might just want someone else to take care of building the docker images for you so you can deploy them immediately from a registry.
 
 That is what this repo does. It is not a fork of WMDPro - none of the application’s code lives here. All credit for the existence of WMDPro goes to the awesome people who made it.
 
@@ -14,6 +14,10 @@ What this repo does, is simply build and publish Docker images of WMDPro (and at
 
 [Web MiniDisc Pro](https://github.com/asivery/webminidisc)
 [atrac-api](https://github.com/MiniDisc-wiki/atrac-api)
+
+## Why are there two images?
+
+Web MiniDisc Pro is the main application, but it can use an external server to convert music files from modern formats (mp3, m4a, etc) into the ATRAC format used on MiniDiscs. The second image provided here (`atrac-api`) is such a server. I think you can technically use WMDPro without that, but I use both, so I'm providing both.
 
 ## How do I use the images?
 
@@ -45,7 +49,7 @@ services:
     hostname: atrac-api
     image: ghcr.io/cmsj/atrac-api:latest
     volumes:
-      - /path/to/your/psp_at3tool.exe:/psp_at3tool.exe
+      - /path/to/your/psp_at3tool.exe:/psp_at3tool.exe:ro
 ```
 
 ### How do I configure WMDPro to use the atrac-api?
