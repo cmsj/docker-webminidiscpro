@@ -15,7 +15,7 @@ What this repo does, is simply build and publish Docker images of WMDPro (and at
 [Web MiniDisc Pro](https://github.com/asivery/webminidisc)
 [atrac-api](https://github.com/MiniDisc-wiki/atrac-api)
 
-## Why are there two images?
+## Why are there two container images?
 
 Web MiniDisc Pro is the main application, but it can use an external server to convert music files from modern formats (mp3, m4a, etc) into the ATRAC format used on MiniDiscs. The second image provided here (`atrac-api`) is such a server. I think you can technically use WMDPro without that, but I use both, so I'm providing both.
 
@@ -23,7 +23,7 @@ Web MiniDisc Pro is the main application, but it can use an external server to c
 
 ### Requirements
 
-* Docker
+* Docker (or Podman)
 * A copy of `psp_at3tool.exe` (I cannot include that file, it is not licensed for distribution)
 
 ### Plain Docker commands
@@ -54,7 +54,7 @@ services:
 
 ### How do I configure WMDPro to use the atrac-api?
 
-* Load WMDPro in your browser (on port `8080` if you used the above Docker commands unmodified)
+* Load WMDPro in your browser (`http://<your-docker-machine>:8080/` if you used the above Docker commands unmodified)
 * Click on the three dots at the top right of the page, select `Settings`
 * For "`LP/HiMD encoder to use`", select "`Remote ATRAC Encoder`"
 * Enter `http://atrac-api:5000` as the Server Address.
