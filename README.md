@@ -4,7 +4,7 @@
 
 For users of some old MiniDisc hardware, it’s possible to connect them to a computer via USB, to transfer music to/from the discs. The wonderful people in the modern MiniDisc community have figured out Sony’s protocols and created a web application called [Web MiniDisc Pro](https://www.minidisc.wiki/guides/webminidisc/start) that only needs a browser.
 
-While using their hosted service is great, sometimes you might want to self-host it. They do provider a `Dockerfile`, but sometimes you might just want someone else to take care of building the docker images for you and pushing them to a registry.
+While using their hosted service is great, sometimes you might want to self-host it. They do provider a `Dockerfile you can build your own image with`, but sometimes you might just want someone else to take care of building the docker images for you and pushing them to a registry.
 
 That is what this repo does. It is not a fork of WMDPro - none of the application’s code lives here.
 
