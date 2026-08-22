@@ -45,7 +45,7 @@ services:
     hostname: atrac-api
     image: ghcr.io/cmsj/atrac-api:latest
     volumes:
-      - /tmp/psp_at3tool.exe:/psp_at3tool.exe
+      - /path/to/your/psp_at3tool.exe:/psp_at3tool.exe
 ```
 
 ### How do I configure WMDPro to use the atrac-api?
