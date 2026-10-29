@@ -1,1 +1,1 @@
-python 3.11-slim 1ba42ef4e94c
+python 3.11-slim de8d79606bef
